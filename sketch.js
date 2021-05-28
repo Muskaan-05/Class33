@@ -26,6 +26,7 @@ function setup(){
     platform = new Ground(150, 305, 300, 170);
 
     box1 = new Box(700,320,70,70);
+    console.log(box1.body);
     box2 = new Box(920,320,70,70);
     pig1 = new Pig(810, 350);
     log1 = new Log(810,260,300, PI/2);
@@ -49,6 +50,9 @@ function setup(){
 function draw(){
     if(backgroundImg)
         background(backgroundImg);
+    else{
+        background("pink");
+    }
     
         noStroke();
         textSize(35)
@@ -81,9 +85,9 @@ function draw(){
 }
 
 function mouseDragged(){
-    //if (gameState!=="launched"){
+    if (gameState!=="launched"){
         Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
-    //}
+    }
 }
 
 
@@ -94,7 +98,9 @@ function mouseReleased(){
 
 function keyPressed(){
     if(keyCode === 32){
+        Matter.Body.setPosition(bird.body,{x:200 , y:50});
        slingshot.attach(bird.body);
+      bird.trajectory = [];
     }
 }
 
